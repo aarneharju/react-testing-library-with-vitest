@@ -6,3 +6,7 @@ test("App contains correct heading", () => {
   const headingElement = screen.getByText(/learn react/i);
   expect(headingElement).toBeInTheDocument();
 });
+
+test("Should pass because it's empty", () => {
+  
+});
