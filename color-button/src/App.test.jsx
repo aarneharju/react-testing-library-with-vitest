@@ -10,6 +10,9 @@ test("The button click flow", () => {
     // Find the button
     const elementButton = screen.getByRole("button", { name: /blue/i });
 
+    // Check the initial color
+    expect(elementButton).toHaveClass("red");
+
     // Click the button
     fireEvent.click(elementButton);
     
@@ -18,4 +21,17 @@ test("The button click flow", () => {
     
     // Check the button color
     expect(elementButton).toHaveClass("blue");
+});
+
+test("The checkbox flow", () => {
+    render(<App/>);
+
+    // Find elements
+    const elementButton = screen.getByRole("button", {name: /blue/i});
+    const elementCheckBox = screen.getByRole("checkbox", { name: /disable button/i });
+
+    // Check initial conditions
+    expect(elementButton).toHaveClass("red");
+    expect(elementButton).toBeEnabled();
+    expect(elementCheckBox).not.toBeChecked();
 });
