@@ -1,6 +1,11 @@
+import "./App.css";
+
+
 function App() {
   return (
-    <div></div>
+    <div>
+      <button className="red">Change to blue!</button>
+    </div>
   );
 }
 
