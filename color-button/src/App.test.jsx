@@ -34,4 +34,16 @@ test("The checkbox flow", () => {
     expect(elementButton).toHaveClass("red");
     expect(elementButton).toBeEnabled();
     expect(elementCheckBox).not.toBeChecked();
+
+    // Check the checkbox
+    fireEvent.click(elementCheckBox);
+
+    // Check that the button is disabled
+    expect(elementButton).not.toBeEnabled();
+
+    // Uncheck the checkbox
+    fireEvent.click(elementCheckBox);
+    
+    // Check that the button is enabled again
+    expect(elementButton).toBeEnabled();
 });
