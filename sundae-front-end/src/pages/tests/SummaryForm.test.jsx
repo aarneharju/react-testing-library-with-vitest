@@ -1,13 +1,13 @@
 import { render, fireEvent, screen, logRoles } from "@testing-library/react";
 import SummaryForm from "../summary/SummaryForm.jsx";
 
-test("Checkbox is unchecked", () => {
+test("Checkbox flow", () => {
     // Render
-    const view = render(<SummaryForm />);
+    const { container } = render(<SummaryForm />);
 
     // Log roles
     // eslint-disable-next-line testing-library/no-debugging-utils
-    logRoles(view);
+    logRoles(container);
 
     // Find checkbox element
     const elementCheckbox = screen.getByRole("checkbox", { name: /terms and conditions/i });
