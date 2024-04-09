@@ -1,20 +1,19 @@
 import { useState } from "react";
 import "./App.css";
 
-
 function App() {
-  const [buttonColor, setButtonColor] = useState("red");
+  const [buttonColor, setButtonColor] = useState("medium-violet-red");
   const [checked, setChecked] = useState(false);
   // const nextColor = buttonColor === "red" ? "blue" : "red";
-  const [nextColor, setNextColor] = useState("blue");
+  const [nextColor, setNextColor] = useState("midnight-blue");
 
   const handleClick = () => {
     setButtonColor(nextColor);
-    setNextColor(nextColor === "blue" ? "red" : "blue");
+    setNextColor(nextColor === "midnight-blue" ? "medium-violet-red" : "midnight-blue");
   }
 
   const handleCheckbox = () => {
-    const colorBeforeDisabling = nextColor === "red" ? "blue" : "red";
+    const colorBeforeDisabling = nextColor === "medium-violet-red" ? "midnight-blue" : "medium-violet-red";
     
     if (!checked) {
       setButtonColor("gray");
