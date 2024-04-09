@@ -39,56 +39,68 @@ test("The checkbox flow", () => {
     // Check the checkbox
     fireEvent.click(elementCheckBox);
 
+    // Check that the checkbox is checked
+    expect(elementCheckBox).toBeChecked();
+    
     // Check that the button is disabled
     expect(elementButton).not.toBeEnabled();
-
+    
     // Check that the button color is gray
     expect(elementButton).toHaveClass("gray");
     
     // Uncheck the checkbox
     fireEvent.click(elementCheckBox);
     
+    // Check that the checkbox is not checked
+    expect(elementCheckBox).not.toBeChecked();
+    
     // Check that the button is enabled again
     expect(elementButton).toBeEnabled();
     
     // Check that the button is still red
     expect(elementButton).toHaveClass("medium-violet-red");
-
+    
     // Click the button
     fireEvent.click(elementButton);
-
+    
     // Check that the button is blue
     expect(elementButton).toHaveClass("midnight-blue");
-
+    
     // Check the checkbox
     fireEvent.click(elementCheckBox);
-
+    
+    // Check that the checkbox is checked
+    expect(elementCheckBox).toBeChecked();
+    
     // Check that the button is gray
     expect(elementButton).toHaveClass("gray");
-
+    
     // Check that the button is disabled
     expect(elementButton).not.toBeEnabled();
-
+    
     // Uncheck the checkbox
     fireEvent.click(elementCheckBox);
     
     // Check that the button is enabled again
     expect(elementButton).toBeEnabled();
     
+    // Check that the checkbox is not checked
+    expect(elementCheckBox).not.toBeChecked();
+    
+    describe("kebabCaseToTitleCase()", () => {
     // Check that the button is still blue
     expect(elementButton).toHaveClass("midnight-blue");
- 
+    
 });
 
-describe("kebabCaseToTitleCase()", () => {
     test("Works with no hyphens", () => {
         expect(kebabCaseToTitleCase("red")).toBe("Red");
     })
-
+    
     test("Works with one hyphen", () => {
         expect(kebabCaseToTitleCase("midnight-blue")).toBe("Midnight Blue");
     })
-
+    
     test("Works with multiple hyphens", () => {
         expect(kebabCaseToTitleCase("medium-violet-red")).toBe("Medium Violet Red");
     })
