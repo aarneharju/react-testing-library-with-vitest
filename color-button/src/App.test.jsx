@@ -9,30 +9,30 @@ test("The button click flow", () => {
     logRoles(container);
 
     // Find the button
-    const elementButton = screen.getByRole("button", { name: /blue/i });
+    const elementButton = screen.getByRole("button", { name: /midnight blue/i });
 
     // Check the initial color
-    expect(elementButton).toHaveClass("red");
+    expect(elementButton).toHaveClass("medium-violet-red");
 
     // Click the button
     fireEvent.click(elementButton);
     
     // Check button text
-    expect(elementButton).toHaveTextContent(/red/i);
+    expect(elementButton).toHaveTextContent(/medium violet red/i);
     
     // Check the button color
-    expect(elementButton).toHaveClass("blue");
+    expect(elementButton).toHaveClass("midnight-blue");
 });
 
 test("The checkbox flow", () => {
     render(<App/>);
 
     // Find elements
-    const elementButton = screen.getByRole("button", {name: /blue/i});
+    const elementButton = screen.getByRole("button", {name: /midnight blue/i});
     const elementCheckBox = screen.getByRole("checkbox", { name: /disable button/i });
 
     // Check initial conditions
-    expect(elementButton).toHaveClass("red");
+    expect(elementButton).toHaveClass("medium-violet-red");
     expect(elementButton).toBeEnabled();
     expect(elementCheckBox).not.toBeChecked();
 
@@ -52,13 +52,13 @@ test("The checkbox flow", () => {
     expect(elementButton).toBeEnabled();
     
     // Check that the button is still red
-    expect(elementButton).toHaveClass("red");
+    expect(elementButton).toHaveClass("medium-violet-red");
 
     // Click the button
     fireEvent.click(elementButton);
 
     // Check that the button is blue
-    expect(elementButton).toHaveClass("blue");
+    expect(elementButton).toHaveClass("midnight-blue");
 
     // Check the checkbox
     fireEvent.click(elementCheckBox);
@@ -76,7 +76,7 @@ test("The checkbox flow", () => {
     expect(elementButton).toBeEnabled();
     
     // Check that the button is still blue
-    expect(elementButton).toHaveClass("blue");
+    expect(elementButton).toHaveClass("midnight-blue");
  
 });
 
