@@ -1,4 +1,4 @@
-import { render, screen, logRoles, queryByText } from "@testing-library/react";
+import { render, screen, logRoles } from "@testing-library/react";
 import SummaryForm from "../summary/SummaryForm.jsx";
 import userEvent from "@testing-library/user-event";
 
