@@ -1,4 +1,4 @@
-import { render, screen, logRoles } from "@testing-library/react";
+import { render, screen, logRoles, queryByText } from "@testing-library/react";
 import SummaryForm from "../summary/SummaryForm.jsx";
 import userEvent from "@testing-library/user-event";
 
@@ -45,11 +45,21 @@ test("Checkbox flow", async () => {
 })
 
 test("Popover responds to hover", async () => {
+    const user = userEvent.setup();
+    
+    render(<SummaryForm />);
+
     // Popover starts out hidden
-
-
+    const popoverHidden = screen.queryByText(/no ice cream will actually be delivered/i);
+    expect(popoverHidden).toBeNull();
+    
     // Popover appears on mouseover of checkbox label
-
-
+    const elementTermsAndConditions = screen.getByText(/terms and conditions/i);
+    await user.hover(elementTermsAndConditions);
+    const popoverVisible = screen.getByText(/no ice cream will actually be delivered/i);
+    expect(popoverVisible).toBeInThedocument()
+    
     // Popover disappears when mouse out
+    await user.unhover(elementTermsAndConditions);
+    expect(popoverVisible).not.toBeInTheDocument();
 })
