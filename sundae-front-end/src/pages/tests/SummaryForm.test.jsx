@@ -1,7 +1,10 @@
-import { render, fireEvent, screen, logRoles } from "@testing-library/react";
+import { render, screen, logRoles } from "@testing-library/react";
 import SummaryForm from "../summary/SummaryForm.jsx";
+import userEvent from "@testing-library/user-event";
 
-test("Checkbox flow", () => {
+test("Checkbox flow", async () => {
+    const user = userEvent.setup();
+
     // Render
     const { container } = render(<SummaryForm />);
 
@@ -22,7 +25,7 @@ test("Checkbox flow", () => {
     expect(elementConfirmOrderButton).toBeDisabled();
     
     // Check the terms and conditions checkbox
-    fireEvent.click(elementCheckbox);
+    await user.click(elementCheckbox);
     
     // Check that the checkbox is checked
     expect(elementCheckbox).toBeChecked();
@@ -31,7 +34,7 @@ test("Checkbox flow", () => {
     expect(elementConfirmOrderButton).toBeEnabled();
     
     // Uncheck the terms and conditions checkbox
-    fireEvent.click(elementCheckbox);
+    await user.click(elementCheckbox);
     
     // Check that the terms and conditions checkbox is unchecked
     expect(elementCheckbox).not.toBeChecked();
@@ -39,4 +42,14 @@ test("Checkbox flow", () => {
     // Check that the confirm order button is disabled
     expect(elementConfirmOrderButton).toBeDisabled();
     
+})
+
+test("Popover responds to hover", async () => {
+    // Popover starts out hidden
+
+
+    // Popover appears on mouseover of checkbox label
+
+
+    // Popover disappears when mouse out
 })
