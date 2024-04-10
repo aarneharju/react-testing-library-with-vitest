@@ -57,7 +57,7 @@ test("Popover responds to hover", async () => {
     const elementTermsAndConditions = screen.getByText(/terms and conditions/i);
     await user.hover(elementTermsAndConditions);
     const popoverVisible = screen.getByText(/no ice cream will actually be delivered/i);
-    expect(popoverVisible).toBeInThedocument()
+    expect(popoverVisible).toBeInTheDocument()
     
     // Popover disappears when mouse out
     await user.unhover(elementTermsAndConditions);
