@@ -1,5 +1,5 @@
 import { render, screen, logRoles } from "@testing-library/react";
-import SummaryForm from "../summary/SummaryForm.jsx";
+import SummaryForm from "../SummaryForm.jsx";
 import userEvent from "@testing-library/user-event";
 
 test("Checkbox flow", async () => {
