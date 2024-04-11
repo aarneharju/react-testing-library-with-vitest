@@ -1,10 +1,9 @@
 import { http, HttpResponse } from 'msw'
  
 export const handlers = [
-  http.get('https://localhost:3030/scoops', () => {
+  http.get('http://localhost:3030/scoops', () => {
     // Note that you DON'T have to stringify the JSON!
-    return HttpResponse.json({
-        iceCreamFlavors: [
+    return HttpResponse.json([
             {
                 "name": "Mint chip",
                 "imagePath": "/images/mint-chip.png" 
@@ -13,7 +12,6 @@ export const handlers = [
                 "name": "Vanilla",
                 "imagePath": "/images/vanilla.png" 
             },
-        ]
-    })
+    ]);
   }),
 ]
