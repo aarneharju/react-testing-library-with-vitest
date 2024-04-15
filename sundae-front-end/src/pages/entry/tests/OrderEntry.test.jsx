@@ -16,6 +16,6 @@ test("Handles error for  scoops and toppings routes", async () => {
 
     render(<OrderEntry />);
 
-    const alerts = await screen.findAllByRole("alert", { name: "An unexpected error occurred. Please try again later."});
+    const alerts = await screen.findAllByRole("alert") // name isn't going to work here because bootstrap alerts don't have the expected name value: , { name: "An unexpected error occurred. Please try again later."});
     expect(alerts).toHaveLength(2);
 });
