@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "../../../test-utils/testing-library-utils";
 import userEvent from "@testing-library/user-event";
 import Options from "../Options";
 import { expect } from "vitest";
@@ -14,14 +14,14 @@ test("Updates scoop subtotal when scoops change", async () => {
     // Update vanilla scoops to 1, and check subtotal
     const vanillaInput = await screen.findByRole("spinbutton", { name: "Vanilla" });
 
-    await user.clear();
+    await user.clear(vanillaInput);
     await user.type(vanillaInput, "1");
     expect(scoopsSubtotal).toHaveTextContent("2.00");
 
     // Update mint chip scoops to 2 and check subtotal
     const mintChipInput = await screen.findByRole("spinbutton", { name: "Mint chip" });
     
-    await user.clear();
+    await user.clear(mintChipInput);
     await user.type(mintChipInput, "2");
     expect(scoopsSubtotal).toHaveTextContent("6.00");
 })

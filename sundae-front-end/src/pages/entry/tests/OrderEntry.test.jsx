@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw';
 import { server } from '../../../mocks/server';
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "../../../test-utils/testing-library-utils";
 import OrderEntry from "../OrderEntry";
 import { expect } from 'vitest';
 
