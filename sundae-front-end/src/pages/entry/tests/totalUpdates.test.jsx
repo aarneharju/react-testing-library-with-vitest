@@ -24,4 +24,14 @@ test("Updates scoop subtotal when scoops change", async () => {
     await user.clear(mintChipInput);
     await user.type(mintChipInput, "2");
     expect(scoopsSubtotal).toHaveTextContent("6.00");
-})
+});
+
+test("Toppings subtotal when toppings change", async () => {
+    const user = userEvent.setup();
+    render(<Options optionType="toppings" />);
+
+    // Make sure total starts out at $0.00
+    const toppingsSubtotal = screen.getByText("Toppings total: $", { exact: false });
+    expect(toppingsSubtotal).toHaveTextContent("0.00");
+
+});
