@@ -34,4 +34,20 @@ test("Toppings subtotal when toppings change", async () => {
     const toppingsSubtotal = screen.getByText("Toppings total: $", { exact: false });
     expect(toppingsSubtotal).toHaveTextContent("0.00");
 
+    // Select M&Ms toppings and check subtotal
+    let toppingsInput = await screen.findByRole("checkbox", { name: "M&Ms"});
+
+    await user.click(toppingsInput);
+    expect(toppingsSubtotal).toHaveTextContent("1.50");
+    
+    // Select Hot fudge topping and check subtotal
+    toppingsInput = await screen.findByRole("checkbox", { name: "Hot fudge"});
+    
+    await user.click(toppingsInput);
+    expect(toppingsSubtotal).toHaveTextContent("3.00");
+    
+    // deselect Hot fudge topping and check susbtotal
+    await user.click(toppingsInput);
+    expect(toppingsSubtotal).toHaveTextContent("1.50");
+
 });
