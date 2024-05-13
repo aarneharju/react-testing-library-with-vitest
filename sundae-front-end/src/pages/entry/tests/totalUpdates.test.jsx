@@ -27,7 +27,7 @@ test("Updates scoop subtotal when scoops change", async () => {
     expect(scoopsSubtotal).toHaveTextContent("6.00");
 });
 
-test("Toppings subtotal when toppings change", async () => {
+test("Updates toppings subtotal when toppings change", async () => {
     const user = userEvent.setup();
     render(<Options optionType="toppings" />);
     
@@ -70,8 +70,13 @@ describe("Grand total", () => {
         await user.clear(elementVanillaInput);
         await user.type(elementVanillaInput, "1");
         
+        // Select M&Ms toppings
+        let toppingsInput = await screen.findByRole("checkbox", { name: "M&Ms"});
+        await user.click(toppingsInput);
+ 
+        // Assert grand total
         const elementGrandTotal = await screen.findByRole("heading", { name: /Grand Total: \$/i });
-        expect(elementGrandTotal).toHaveTextContent("2.00")
+        expect(elementGrandTotal).toHaveTextContent("3.50")
         
     });
     
@@ -79,10 +84,18 @@ describe("Grand total", () => {
         const user = await userEvent.setup();
         render(<OrderEntry/>);
   
+        // Select hot fudge topping
         const elementHotFudge = await screen.findByRole("checkbox", { name: "Hot fudge" });
         await user.click(elementHotFudge);
+
+        // Add one Vanilla scoop
+        const elementVanillaInput = await screen.findByRole("spinbutton", { name: "Vanilla" });
+        await user.clear(elementVanillaInput);
+        await user.type(elementVanillaInput, "1");
+
+        // Assert grand total
         const elementGrandTotal = await screen.findByRole("heading", { name: /Grand Total: \$/i });
-        expect(elementGrandTotal).toHaveTextContent("1.50")
+        expect(elementGrandTotal).toHaveTextContent("3.50")
         
     });
 
@@ -90,17 +103,25 @@ describe("Grand total", () => {
         const user = await userEvent.setup();
         render(<OrderEntry/>);
         
+        // Add one Vanilla scoop
         const elementVanillaInput = await screen.findByRole("spinbutton", { name: "Vanilla" });
         await user.clear(elementVanillaInput);
         await user.type(elementVanillaInput, "1");
         
+        // Add one Mint chip scoop
         const elementMintChipInput = await screen.findByRole("spinbutton", { name: "Mint chip" });
         await user.clear(elementMintChipInput);
         await user.type(elementMintChipInput, "1");
         
+        // Remove one Vanilla scoop
         await user.clear(elementVanillaInput);
         await user.type(elementVanillaInput, "0");
 
+        // Select M&Ms toppings
+        let toppingsInput = await screen.findByRole("checkbox", { name: "M&Ms"});
+        await user.click(toppingsInput);
+  
+        // Assert grand total
         const elementGrandTotal = await screen.findByRole("heading", { name: /Grand Total: \$/i });
         expect(elementGrandTotal).toHaveTextContent("3.50")
         
