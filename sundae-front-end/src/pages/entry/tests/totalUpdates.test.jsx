@@ -62,12 +62,13 @@ describe("Grand total", () => {
     });
     
     test("Grand total updates properly if a scoop is added first", async () => {
-        const user = userEvent.setup();
+        const user = await userEvent.setup();
         render(<OrderEntry/>);
         
+        // Add one Vanilla scoop
         const elementVanillaInput = await screen.findByRole("spinbutton", { name: "Vanilla" });
         await user.clear(elementVanillaInput);
-        user.type(elementVanillaInput, "1");
+        await user.type(elementVanillaInput, "1");
         
         const elementGrandTotal = await screen.findByRole("heading", { name: /Grand Total: \$/i });
         expect(elementGrandTotal).toHaveTextContent("2.00")
@@ -75,30 +76,31 @@ describe("Grand total", () => {
     });
     
     test("Grand total updates properly if a topping is added first", async () => {
-        const user = userEvent.setup();
+        const user = await userEvent.setup();
         render(<OrderEntry/>);
   
         const elementHotFudge = await screen.findByRole("checkbox", { name: "Hot fudge" });
-        user.click(elementHotFudge);
+        await user.click(elementHotFudge);
         const elementGrandTotal = await screen.findByRole("heading", { name: /Grand Total: \$/i });
         expect(elementGrandTotal).toHaveTextContent("1.50")
         
     });
+
     test("Grand total updates properly if item is removed", async () => {
-        const user = userEvent.setup();
+        const user = await userEvent.setup();
         render(<OrderEntry/>);
         
         const elementVanillaInput = await screen.findByRole("spinbutton", { name: "Vanilla" });
         await user.clear(elementVanillaInput);
-        user.type(elementVanillaInput, "1");
+        await user.type(elementVanillaInput, "1");
         
         const elementMintChipInput = await screen.findByRole("spinbutton", { name: "Mint chip" });
         await user.clear(elementMintChipInput);
-        user.type(elementMintChipInput, "1");
+        await user.type(elementMintChipInput, "1");
         
         await user.clear(elementVanillaInput);
-        user.type(elementVanillaInput, "0");
-                
+        await user.type(elementVanillaInput, "0");
+
         const elementGrandTotal = await screen.findByRole("heading", { name: /Grand Total: \$/i });
         expect(elementGrandTotal).toHaveTextContent("3.50")
         
