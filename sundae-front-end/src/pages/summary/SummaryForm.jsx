@@ -5,8 +5,10 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Popover from 'react-bootstrap/Popover';
 
 
-const SummaryForm = () => {
+const SummaryForm = (props) => {
     const [checkedTermsAndConditions, setCheckedTermsAndConditions] = useState(false);
+
+    const handleClick = () => props.setOrderPhase("complete");
 
     const popover = (
     <Popover id="popover-basic">
@@ -36,7 +38,7 @@ const SummaryForm = () => {
                     label={checkboxLabel}
                 />
             </Form.Group>
-            <Button variant="primary" type="submit" disabled={!checkedTermsAndConditions}>Confirm order</Button>
+            <Button variant="primary" type="submit" onClick={ handleClick } disabled={!checkedTermsAndConditions}>Confirm order</Button>
         </Form>
     )
 }
