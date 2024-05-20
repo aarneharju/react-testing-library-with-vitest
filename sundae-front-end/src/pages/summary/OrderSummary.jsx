@@ -20,11 +20,11 @@ export default function OrderSummary(props) {
             <ul>
                { scoopList }
             </ul>
-            <h2>Toppings:</h2>
+            <h2>Toppings: { formatCurrency(totals.toppings) }</h2>
             <ul>
                 { toppingList }
             </ul>
-            <h2>Toppings: { formatCurrency(totals.toppings) }</h2>
+            <h2>Total: { formatCurrency(totals.scoops + totals.toppings) }</h2>
             <SummaryForm setOrderPhase={props.setOrderPhase} />
         </div>
     )
