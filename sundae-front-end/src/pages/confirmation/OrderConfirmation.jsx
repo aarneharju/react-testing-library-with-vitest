@@ -1,10 +1,13 @@
 import Button from "react-bootstrap/Button";
+import { useOrderDetails } from "../../contexts/OrderDetails";
 
 export default function OrderConfirmation(props) {
+    const { resetOrder } = useOrderDetails();
+
     const handleClick = () => {
+        resetOrder();
         props.setOrderPhase("inProgress");
 
-        // TODO: Clear data so the order starts from a blank slate
     };
 
     return (
