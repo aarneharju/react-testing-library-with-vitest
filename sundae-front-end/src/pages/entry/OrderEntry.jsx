@@ -20,7 +20,7 @@ export default function OrderEntry(props) {
                 </h2>
             </div>
             <div>
-                <Button onClick={ handleClick }>Order</Button>
+                <Button onClick={ handleClick }>Order sundae</Button>
             </div>
         </>
     );
