@@ -1,4 +1,4 @@
-import { findByRole, getByRole, render, screen } from "../test-utils/testing-library-utils.jsx";
+import { render, screen } from "../test-utils/testing-library-utils.jsx";
 import userEvent from "@testing-library/user-event";
 import App from "../App.jsx"
 import { expect } from "vitest";
