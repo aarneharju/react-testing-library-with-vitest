@@ -34,11 +34,11 @@ function App() {
   };
   
   return (
-    <Container>
-      <OrderDetailsProvider>
+    <OrderDetailsProvider>
+      <Container>
         { showCorrectPageComponentDependingOnOrderPhase() }
-      </OrderDetailsProvider>
-    </Container>
+      </Container>
+    </OrderDetailsProvider>
   );
 }
 
