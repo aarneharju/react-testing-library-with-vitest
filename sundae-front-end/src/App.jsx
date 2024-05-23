@@ -6,6 +6,7 @@ import OrderConfirmation from "./pages/confirmation/OrderConfirmation";
 import { OrderDetailsProvider } from "./contexts/OrderDetails";
 
 function App() {
+  // orderPhase is either "inProgress", "review" or "complete"
   const [orderPhase, setOrderPhase] = useState("inProgress");
 
   const showCorrectPageComponentDependingOnOrderPhase = () => {
