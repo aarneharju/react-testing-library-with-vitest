@@ -8,7 +8,10 @@ import Popover from 'react-bootstrap/Popover';
 const SummaryForm = (props) => {
     const [checkedTermsAndConditions, setCheckedTermsAndConditions] = useState(false);
 
-    const handleClick = () => props.setOrderPhase("complete");
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        props.setOrderPhase("complete");
+    }
 
     const popover = (
     <Popover id="popover-basic">
@@ -29,7 +32,7 @@ const SummaryForm = (props) => {
     );
 
     return (
-        <Form>
+        <Form onSubmit={ handleSubmit }>
             <Form.Group controlId="terms-and-conditions">
                 <Form.Check
                     type="checkbox"
@@ -38,7 +41,7 @@ const SummaryForm = (props) => {
                     label={checkboxLabel}
                 />
             </Form.Group>
-            <Button variant="primary" type="submit" onClick={ handleClick } disabled={!checkedTermsAndConditions}>Confirm order</Button>
+            <Button variant="primary" type="submit" disabled={!checkedTermsAndConditions}>Confirm order</Button>
         </Form>
     )
 }
