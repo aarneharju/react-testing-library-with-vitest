@@ -1,6 +1,6 @@
 import { render, screen } from "../test-utils/testing-library-utils.jsx";
 import userEvent from "@testing-library/user-event";
-import App from "../App.jsx"
+import App from "../App";
 import { expect } from "vitest";
 
 test("Order phases for happy path", async () => {
