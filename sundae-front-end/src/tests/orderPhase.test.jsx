@@ -5,24 +5,31 @@ import { expect } from "vitest";
 
 test("Order phases for happy path", async () => {
     // Setup user for click etc events
-    const user = await userEvent.setup();
-
+    const user = userEvent.setup();
+    
     // Render app
     // No need to wrap in provider, already wrapped in App.jsx?
     // Destructure unmount from return value to use at the end of the test
     const { unmount } = render(<App />);
-
+    
     // Add two different scoops and a topping
     const locatorScoopVanillaInput = await screen.findByRole("spinbutton", { name: "Vanilla" });
-    user.clear(locatorScoopVanillaInput);
-    user.type(locatorScoopVanillaInput, "1");
+    await user.click(locatorScoopVanillaInput);
+    await user.clear(locatorScoopVanillaInput);
+    await user.type(locatorScoopVanillaInput, "1");
     
     const locatorScoopMintChipInput = screen.getByRole("spinbutton", { name: "Mint chip" }); // No need for await because if Vanilla has loaded, so has Mint chip
-    user.clear(locatorScoopMintChipInput);
-    user.type(locatorScoopMintChipInput, "1");
+    await user.click(locatorScoopMintChipInput);
+    await user.clear(locatorScoopMintChipInput);
+    await user.type(locatorScoopMintChipInput, "1");
     
     const locatorToppingMMInput = await screen.findByRole("checkbox", { name: "M&Ms" }); // Topping needs await because it needs an axios call to a different endpoint (toppings)
-    user.click(locatorToppingMMInput);
+    await user.click(locatorToppingMMInput);
+    
+    // // ============
+    // console.log("Order entry page:");
+    // screen.debug();
+    // // ============
     
     // Find and click order button
     const locatorOrderButton = screen.getByRole("button", { name: /order sundae/i });
@@ -33,10 +40,14 @@ test("Order phases for happy path", async () => {
     const locatorSummaryToppings = await screen.findByText("Toppings:", { exact: false });
     const locatorSummaryTotal = await screen.findByText("Total:", { exact: false });
     
-    
     console.log("locatorSummaryScoops.textContent:", locatorSummaryScoops.textContent);
     console.log("locatorSummaryToppings.textContent:", locatorSummaryToppings.textContent);
     console.log("locatorSummaryTotal.textContent:", locatorSummaryTotal.textContent);
+    
+    // // ============
+    // console.log("Summary page:");
+    // screen.debug();
+    // // ============
     
     expect(locatorSummaryScoops).toHaveTextContent("4.00");
     expect(locatorSummaryToppings).toHaveTextContent("1.50");
@@ -49,13 +60,13 @@ test("Order phases for happy path", async () => {
     await user.click(locatorButtonConfirmOrder);
     
     // Confirm order number on confirmation page
-    // const locatorOrderNumber = await screen.findByRole("heading", { name: /order number/i });
-    const locatorOrderNumber = await screen.findByText("order number", { exact: false })
+    const locatorOrderNumber = await screen.findByRole("heading", { name: /[0-9]{10}/ })
     expect(locatorOrderNumber).toHaveTextContent("1234567890");
 
-    // ============
-    screen.debug();
-    // ============
+    // // ============
+    // console.log("Confirm order page:");
+    // screen.debug();
+    // // ============
     
     // Click new order button on confirmation page to go back to beginning
     const locatorButtonNewOrder = screen.getByRole("button", { name: /new order/i });
