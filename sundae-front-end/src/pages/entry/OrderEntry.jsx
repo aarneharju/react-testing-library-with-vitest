@@ -8,6 +8,8 @@ export default function OrderEntry(props) {
 
     const handleClick = () => props.setOrderPhase("review");
 
+    const scoopsHaveBeenAdded = totals.scoops > 0; // totals is coming from context and so has a state and can be used directly like this
+
     return (
         <>
             <div>
@@ -20,7 +22,7 @@ export default function OrderEntry(props) {
                 </h2>
             </div>
             <div>
-                <Button onClick={ handleClick }>Order sundae</Button>
+                <Button onClick={ handleClick } disabled={ !scoopsHaveBeenAdded }>Order sundae</Button>
             </div>
         </>
     );
