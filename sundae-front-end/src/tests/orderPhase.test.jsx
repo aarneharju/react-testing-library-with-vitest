@@ -82,3 +82,30 @@ test("Order phases for happy path", async () => {
     // "not wrapped in act()" error
     unmount();
 });
+
+test("Should not see toppings header if toppings are not added to order", async () => {
+    // Setup user events
+    const user = userEvent.setup();
+
+    // Render App
+    render(<App />);
+
+    // Add a vanilla scoop
+    const locatorVanillaScoop = await screen.findByRole("spinbutton", { name: /vanilla/i });
+    await user.click(locatorVanillaScoop);
+    await user.clear(locatorVanillaScoop);
+    await user.type(locatorVanillaScoop, "1");
+
+    // Click order
+    const locatorButtonOrder = screen.getByRole("button", { name: /order sundae/i });
+    await user.click(locatorButtonOrder);
+
+    // Assert that the scoops heading is visible on the order summary page
+    const locatorHeadingScoops = screen.getByRole("heading", { name: /scoops/i });
+    expect(locatorHeadingScoops).toBeInTheDocument();
+    
+    // Assert that the toppings heading is not visible on the order summary page
+    const locatorHeadingToppings = screen.queryByRole("heading", { name: /toppings/i});
+    expect(locatorHeadingToppings).not.toBeInTheDocument();
+
+})
