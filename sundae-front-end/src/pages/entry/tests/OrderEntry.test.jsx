@@ -4,7 +4,6 @@ import { render, screen } from "../../../test-utils/testing-library-utils";
 import OrderEntry from "../OrderEntry";
 import { expect } from 'vitest';
 import userEvent from '@testing-library/user-event';
-import { OrderDetailsProvider } from '../../../contexts/OrderDetails';
 
 test("Handles error for  scoops and toppings routes", async () => {
     server.resetHandlers(
