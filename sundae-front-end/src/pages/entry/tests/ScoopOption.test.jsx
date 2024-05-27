@@ -1,5 +1,5 @@
 import userEvent from "@testing-library/user-event";
-import { getByRole, render, screen } from "../../../test-utils/testing-library-utils";
+import { render, screen } from "../../../test-utils/testing-library-utils";
 import ScoopOption from "../ScoopOption";
 
 test("Invalid values for scoops should not work", async () => {
