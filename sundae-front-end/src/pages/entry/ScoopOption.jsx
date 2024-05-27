@@ -23,7 +23,11 @@ export default function ScoopOption({name, imagePath}) {
         // Validate
         setIsValid(valueIsValid);
 
-        updateItemCount(name, parseInt(event.target.value),"scoops")
+        if(valueIsValid) {
+            updateItemCount(name, parseInt(event.target.value),"scoops");
+        } else {
+            updateItemCount(name, 0, "scoops");
+        }
     };
 
 
