@@ -14,10 +14,6 @@ export default function OrderConfirmation(props) {
         .then(response => setOrderNumber(response.data.orderNumber))
         .catch(error => setError(true));
     }, []);
-
-    if(error) {
-        return <AlertBanner />
-    }
     
     const handleClick = () => {
         resetOrder();
@@ -25,12 +21,27 @@ export default function OrderConfirmation(props) {
 
     };
 
+    const NewOrderButton = () => {
+        return (
+            <Button onClick={ handleClick }>Create new order</Button>
+        )
+    }
+
+    if(error) {
+        return (
+            <>
+                <AlertBanner />
+                <NewOrderButton />
+            </>
+        )
+    }
+
     return (
         <div>
             <h2>Thank you!</h2>
             <h3>Your order number is: { orderNumber ? orderNumber : "Loading..." }</h3>
             <p>As per our terms and conditions, nothing will happen now</p>
-            <Button onClick={ handleClick }>Create new order</Button>
+            <NewOrderButton />
         </div>
     )
 }
